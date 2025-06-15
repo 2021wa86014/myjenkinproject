@@ -1,22 +1,32 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="me.mahakagg.calculator">
 
-    <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher_cal"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_cal"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-        <activity android:name=".MainActivity"
-            android:launchMode="singleTop">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>your.group.id</groupId>
+    <artifactId>your-artifact-id</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    ...
+</:
+- Remove the Maven build step from Jenkins.
+- Use a different build tool (like Gradle for Android).
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-    </application>
+---
 
-</manifest>
+### 2. **Update Jenkins Job Configuration**
+If your project is Android-based or not Maven-based:
+- **Disable Maven build steps** in Jenkins.
+- Use a **custom shell script** or **Gradle** to build the project.
+
+If it is Maven-based:
+- Ensure the correct `pom.xml` is present in the root directory.
+- Set `sonar.sources` to the actual source code directory (e.g., `src/main/java`), not `pom.xml`.
+
+---
+
+### 3. **Fix SonarQube Configuration**
+Update your SonarQube scanner command in Jenkins to:
+
+```bash
+-Dsonar.sources=src/main/java
